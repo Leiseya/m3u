@@ -3,7 +3,7 @@
     "lives": [{
             "name": "直播",
             "type": 0,
-            "url": "直播源的URL地址",
+            "url": "https://raw.githubusercontent.com/Leiseya/m3u/refs/heads/main/anhui.txt",
                     "epg": "https://epg.112114.xyz/?ch={name}&date={date}",
             "logo": "https://epg.112114.xyz/logo/{name}.png"
         }, {

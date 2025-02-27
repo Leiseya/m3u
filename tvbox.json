@@ -3,7 +3,7 @@
     "lives": [{
             "name": "直播",
             "type": 0,
-            "url": "https://raw.githubusercontent.com/Leiseya/m3u/refs/heads/main/anhui.txt",
+            "url": "https://raw.githubusercontent.com/Leiseya/m3u/refs/heads/main/%E5%AE%89%E5%BE%BD%E8%81%94%E9%80%9A%E5%9B%9E%E7%9C%8B.m3u",
                     "epg": "https://epg.112114.xyz/?ch={name}&date={date}",
             "logo": "https://epg.112114.xyz/logo/{name}.png"
         }, {

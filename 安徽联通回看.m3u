@@ -163,7 +163,7 @@ http://10.255.126.3:8006/AHBKLIVE/ccfffb202e2e4795b85241af37abc8de
 #EXTINF:-1 tvg-id="6595" tvg-name="快乐垂钓" tvg-logo="http://epg.51zmt.top:8000/tb1/qt/KUAILECHUIDIAO.jpg" group-title="数字付费",快乐垂钓
 http://10.255.126.3:8006/AHBKLIVE/4d0ec3c7a7cf41458ce3c7e241f7ed7a
 
-#EXTINF:-1 tvg-id="6623" tvg-name="财付天下" tvg-logo="http://epg.51zmt.top:8000/tb1/qt/%E8%B4%A2%E5%AF%8C%E5%A4%A9%E4%B8%8B.png" group-title="北京",财富天下
+#EXTINF:-1 tvg-id="6623" tvg-name="财富天下" tvg-logo="http://epg.51zmt.top:8000/tb1/qt/%E8%B4%A2%E5%AF%8C%E5%A4%A9%E4%B8%8B.png" group-title="数字付费",北广财富天下
 http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000183?m3u8=.m3u8
 
 

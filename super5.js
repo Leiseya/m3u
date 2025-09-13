@@ -1,16 +1,14 @@
 /***********************************
 > 联通超级星期五多账号秒杀（Shadowrocket专用）
 > 支持多账户循环、自动通知
-> 自动根据 ticket 生成 Referer
 > 更新时间：2025-09-13
 ***********************************/
 
 /* ===================== 配置区 ===================== */
 // 每个账号的 ticket，从抓包获得
-// 示例：["ticket1", "ticket2", "ticket3"]
 const tickets = [
-  "ticket_for_account1",
-  "ticket_for_account2"
+  "87376127394be89c1e4f42ce388992", // 账号1 ticket
+  "ticket_for_account2"               // 账号2 ticket
 ];
 
 // 活动参数
@@ -25,7 +23,6 @@ const INTERVAL_MS = 1200;
   for (let i = 0; i < tickets.length; i++) {
     const ticket = tickets[i];
     const url = `http://123.138.11.116:8080/wxopen/app-activity/AHSecKill/lotteryAction?ticket=${ticket}&itemCode=${itemCode}&range=${range}`;
-    // 自动生成 Referer，包含 ticket
     const referer = `http://123.138.11.116:8080/wxopen/hh/activity/superFriday/index?ticket=${ticket}`;
     const headers = {
       "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) unicom{version:iphone_c@12.0600};ltst;OSVersion/18.6.2",

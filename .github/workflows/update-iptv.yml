@@ -2,18 +2,17 @@ name: Update IPTV M3U
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天凌晨 0 点 UTC（北京时间 早上 8 点）
-  workflow_dispatch:      # 手动触发支持
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   update-m3u:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout 仓库
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          persist-credentials: true
           fetch-depth: 0
 
       - name: 下载 IPTV 文件并添加头部
@@ -21,7 +20,10 @@ jobs:
           mkdir -p tmp && cd tmp
 
           echo "📥 正在下载 ahuniptv.m3u ..."
-          curl -L -f -o ahuniptv_raw.m3u "https://www.wmviv.com/iptv/ahuniptv.m3u" || { echo "❌ 下载失败，退出"; exit 1; }
+          if ! curl -L --http1.1 -f --retry 3 --retry-delay 2 -o ahuniptv_raw.m3u "https://www.wmviv.com/iptv/ahuniptv.m3u"; then
+            echo "⚠️ 下载失败，跳过更新。"
+            exit 0
+          fi
 
           echo "🧩 生成带自定义头部的新文件 ..."
           echo '#EXTM3U url-tvg="http://epg.51zmt.top:8000/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"' > ahuniptv.m3u
@@ -38,9 +40,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           git add ahuniptv.m3u
-          if git diff --cached --quiet; then
-            echo "⚠️ 文件无变化，无需提交。"
-          else
-            git commit -m "自动更新 IPTV 列表 $(date '+%Y-%m-%d %H:%M:%S')"
-            git push
-          fi
+          if git

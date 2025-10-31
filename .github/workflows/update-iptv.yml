@@ -1,43 +1,64 @@
-name: Update IPTV M3U
+name: Update ahuniptv.m3u
 
 on:
+  workflow_dispatch:  # 允许手动触发
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: "0 */6 * * *"  # 每6小时自动更新
 
 jobs:
-  update-m3u:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 仓库
+      - name: 🧩 Checkout repo
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-          fetch-depth: 0
 
-      - name: 下载 IPTV 文件并添加头部
+      - name: ⚙️ Install curl & tools
         run: |
-          mkdir -p tmp && cd tmp
+          sudo apt-get update
+          sudo apt-get install -y curl dos2unix
 
+      - name: 📥 Download ahuniptv.m3u
+        run: |
+          mkdir -p tmp
+          cd tmp
           echo "📥 正在下载 ahuniptv.m3u ..."
-          if ! curl -L --http1.1 -f --retry 3 --retry-delay 2 -o ahuniptv_raw.m3u "https://www.wmviv.com/iptv/ahuniptv.m3u"; then
-            echo "⚠️ 下载失败，跳过更新。"
+          # 使用 --http1.1 防止 HTTP/2 协议错误
+          if ! curl -L --http1.1 --retry 5 --retry-delay 5 -o ahuniptv.m3u https://www.wmviv.com/iptv/ahuniptv.m3u; then
+            echo "❌ 下载失败，退出"
             exit 0
           fi
 
-          echo "🧩 生成带自定义头部的新文件 ..."
-          echo '#EXTM3U url-tvg="http://epg.51zmt.top:8000/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"' > ahuniptv.m3u
-          cat ahuniptv_raw.m3u >> ahuniptv.m3u
+          # 检查文件是否为空
+          if [ ! -s ahuniptv.m3u ]; then
+            echo "⚠️ 下载失败或内容为空，跳过更新。"
+            exit 0
+          fi
 
+      - name: 🧾 Modify header
+        run: |
+          cd tmp
+          echo "🧾 正在修改文件头..."
+          # 目标头部
+          NEW_HEADER='#EXTM3U url-tvg="http://epg.51zmt.top:8000/e.xml" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}"'
+          
+          # 删除旧头部并添加新的
+          tail -n +2 ahuniptv.m3u > body.m3u
+          echo "$NEW_HEADER" > ahuniptv.m3u
+          cat body.m3u >> ahuniptv.m3u
+          rm body.m3u
+          
+          dos2unix ahuniptv.m3u
           mv ahuniptv.m3u ../ahuniptv.m3u
-          cd ..
 
-      - name: 提交并推送更新到仓库
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🪣 Commit & Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add ahuniptv.m3u
-          if git
+          if git diff --quiet; then
+            echo "✅ 没有变化，跳过提交。"
+          else
+            git add ahuniptv.m3u
+            git commit -m "🔄 Update ahuniptv.m3u ($(date '+%Y-%m-%d %H:%M:%S'))"
+            git push
+          fi

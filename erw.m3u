@@ -46,7 +46,7 @@ http://10.255.127.35:6060/gitv_live/G_CGTN-PYCCNN/index.m3u8?Playtype=1&gMac=00&
 http://10.255.127.35:6060/gitv_live/G_CGTN_A/index.m3u8?Playtype=1&gMac=00&partnerCode=-&m3u8_level=2
 #EXTINF:-1 tvg-id="25" tvg-name="CGTN" tvg-logo="https://pic.erw.cc/epglogo/cctv/CGTN.png" group-title="央视",CGTN
 http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000148?m3u8=.m3u8
-#EXTINF:-1 tvg-id="25" tvg-name="CGTN" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV17.png" group-title="央视",CGTN
+#EXTINF:-1 tvg-id="25" tvg-name="CGTN" tvg-logo="https://pic.erw.cc/epglogo/cctv/CGTN.png" group-title="央视",CGTN
 http://10.255.127.35:6060/gitv_live/G_CCTV-NEWS/index.m3u8?Playtype=1&gMac=00&partnerCode=-&m3u8_level=2
 #EXTINF:-1 tvg-id="26" tvg-name="CCTV4K" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV4k.png" group-title="央视",CCTV4K
 http://10.255.127.35:6060/gitv_live/G_CCTV-4K-HD/index.m3u8?Playtype=1&gMac=00&partnerCode=-&m3u8_level=2

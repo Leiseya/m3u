@@ -1,0 +1,9 @@
+#EXTM3U url-tvg="https://e.erw.cc/all.xml" 
+#EXTINF:-1 tvg-id="1" tvg-name="CCTV1" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV1.png" group-title="央视" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" ,CCTV-1综合
+http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000152
+#EXTINF:-1 tvg-id="2" tvg-name="CCTV2" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV2.png" group-title="央视" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" ,CCTV-2财经
+http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000477
+#EXTINF:-1 tvg-id="3" tvg-name="CCTV3" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV3.png" group-title="央视" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" ,CCTV-3综艺
+http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000487
+#EXTINF:-1 tvg-id="4" tvg-name="CCTV4" tvg-logo="https://pic.erw.cc/epglogo/cctv/CCTV4.png" group-title="央视" catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" ,CCTV-4中文国际
+http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000573
